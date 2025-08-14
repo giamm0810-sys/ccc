@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Hàng - Quán Trà Chanh</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1><i class="fas fa-store"></i> Quán Trà Chanh</h1>
+            <p>Thức uống tươi mát - Phục vụ tận tâm</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Menu Section -->
+            <section class="menu-section">
+                <h2><i class="fas fa-utensils"></i> Thực Đơn</h2>
+                <div class="menu-grid" id="menuGrid">
+                    <!-- Menu items will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Cart Section -->
+            <section class="cart-section">
+                <h2><i class="fas fa-shopping-cart"></i> Giỏ Hàng</h2>
+                <div class="cart-container">
+                    <div class="cart-items" id="cartItems">
+                        <p class="empty-cart">Giỏ hàng trống</p>
+                    </div>
+                    <div class="cart-total">
+                        <strong>Tổng cộng: <span id="cartTotal">0</span>đ</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Order Form -->
+            <section class="order-form-section">
+                <h2><i class="fas fa-clipboard-list"></i> Thông Tin Đặt Hàng</h2>
+                <form class="order-form" id="orderForm">
+                    <div class="form-group">
+                        <label for="customerName">Tên khách hàng *</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerPhone">Số điện thoại *</label>
+                        <input type="tel" id="customerPhone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hình thức phục vụ *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="serviceType" value="dine-in" checked>
+                                <span>Uống tại quán</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="serviceType" value="delivery">
+                                <span>Giao hàng</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="addressGroup" style="display: none;">
+                        <label for="customerAddress">Địa chỉ giao hàng</label>
+                        <textarea id="customerAddress" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderNotes">Ghi chú</label>
+                        <textarea id="orderNotes" rows="2" placeholder="Yêu cầu đặc biệt (nếu có)"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="submitOrder">
+                        <i class="fas fa-paper-plane"></i> Đặt Hàng
+                    </button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-check-circle"></i> Đặt Hàng Thành Công!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Cảm ơn bạn đã đặt hàng! Chúng tôi sẽ liên hệ với bạn sớm nhất.</p>
+                <p><strong>Mã đơn hàng:</strong> <span id="orderIdDisplay"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="closeModal()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Đang xử lý đơn hàng...</p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    
+    <!-- OneSignal SDK -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    
+    <!-- App Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
